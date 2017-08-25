@@ -1,3 +1,6 @@
 /// <reference types="react" />
 import * as React from 'react';
-export declare const App: React.SFC<null>;
+export declare class App extends React.Component<null, null> {
+    constructor();
+    render(): JSX.Element;
+}
