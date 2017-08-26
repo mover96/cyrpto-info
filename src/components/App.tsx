@@ -2,6 +2,7 @@ import * as React from 'react'
 import * as JSONP from 'fetch-jsonp'
 
 import { CoinInfo } from '../interfaces/coinInfo'
+import { PriceBlock } from './PriceBlock'
 
 export interface AppState {
   coins: CoinInfo[]
@@ -27,20 +28,24 @@ export class App extends React.Component<null, AppState> {
       coins: []
     }
   }
-  public componentWillMount() {
+  public componentDidMount() {
     fetch('/wci')
       .then((res: any) => res.json())
       .then((marketsObj: { Markets: Market[] }) => {
         for (const market of marketsObj.Markets) {
-          for (const ticker of this.getCoinTickers()) {
+          for (const myCoinObj of this.getMyCoinInfo()) {
+            const ticker = myCoinObj.ticker
             if (market.Label === ticker) {
+              const tempDate = new Date(0)
+              tempDate.setUTCSeconds(market.Timestamp)
               const newCoin: CoinInfo = {
                 name: market.Name,
                 ticker: market.Label,
                 btcPrice: market.Price_btc,
                 usdPrice: market.Price_usd,
                 volume24: market.Volume_24h,
-                timestamp: new Date(market.Timestamp)
+                timestamp: tempDate,
+                myCoins: myCoinObj.myCoins
               }
               const newCoinState = this.state.coins
               newCoinState.push(newCoin)
@@ -51,22 +56,29 @@ export class App extends React.Component<null, AppState> {
       })
   }
   public render() {
-    const listItems = this.state.coins.map((coin: CoinInfo, index: number) => {
-      return (
-        <li key={index}>
-          {coin.name}
-        </li>
-      )
-    })
+    const priceBlocks = this.state.coins.map(
+      (coin: CoinInfo, index: number) => {
+        return <PriceBlock coinInfo={coin} key={index} />
+      }
+    )
     return (
-      <div>
-        <ul>
-          {listItems}
-        </ul>
+      <div
+        style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          alignContent: 'center'
+        }}
+      >
+        {priceBlocks}
       </div>
     )
   }
-  private getCoinTickers(): string[] {
-    return ['ADT/BTC', 'ETH/BTC', 'BTC/BTC', 'NEO/BTC']
+  private getMyCoinInfo(): any {
+    return [
+      { ticker: 'ADT/BTC', myCoins: 38343.07891198 },
+      { ticker: 'ETH/BTC', myCoins: 5.88493539 },
+      { ticker: 'BTC/BTC', myCoins: 0.00000299 },
+      { ticker: 'NEO/BTC', myCoins: 9.19 }
+    ]
   }
 }

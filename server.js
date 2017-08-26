@@ -37,7 +37,6 @@ let lastTime = null
 app.get('/wci', (req, res) => {
   //throttle requests
   if (Date.now() - lastTime > 60000) {
-    console.log('hit')
     fetch(
       'https://www.worldcoinindex.com/apiservice/json?key=TXQy4zAtd1R27ZIb52rVoQmTq'
     )

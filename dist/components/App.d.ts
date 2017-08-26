@@ -18,7 +18,7 @@ export interface Market {
 }
 export declare class App extends React.Component<null, AppState> {
     constructor(props: any);
-    componentWillMount(): void;
+    componentDidMount(): void;
     render(): JSX.Element;
-    private getCoinTickers();
+    private getMyCoinInfo();
 }

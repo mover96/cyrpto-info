@@ -5,4 +5,5 @@ export interface CoinInfo {
   usdPrice: number
   volume24: number
   timestamp: Date
+  myCoins: number
 }
