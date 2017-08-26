@@ -21,8 +21,8 @@ export interface Market {
 }
 
 export class App extends React.Component<null, AppState> {
-  public constructor() {
-    super()
+  public constructor(props: any) {
+    super(props)
     this.state = {
       coins: []
     }
@@ -42,18 +42,19 @@ export class App extends React.Component<null, AppState> {
                 volume24: market.Volume_24h,
                 timestamp: new Date(market.Timestamp)
               }
-              this.state.coins.push(newCoin)
+              const newCoinState = this.state.coins
+              newCoinState.push(newCoin)
+              this.setState({ coins: newCoinState })
             }
           }
         }
       })
   }
   public render() {
-    let i = 0
-    const listItems = this.state.coins.map((coin: CoinInfo) => {
+    const listItems = this.state.coins.map((coin: CoinInfo, index: number) => {
       return (
-        <li key={i++}>
-          {coin}
+        <li key={index}>
+          {coin.name}
         </li>
       )
     })

@@ -17,7 +17,7 @@ export interface Market {
     Volume_24h: number;
 }
 export declare class App extends React.Component<null, AppState> {
-    constructor();
+    constructor(props: any);
     componentWillMount(): void;
     render(): JSX.Element;
     private getCoinTickers();
