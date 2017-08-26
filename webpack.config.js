@@ -1,7 +1,8 @@
 var path = require('path')
+var webpack = require('webpack')
 
 module.exports = {
-  entry: './src/index.tsx',
+  entry: ['webpack-hot-middleware/client', './src/index.tsx'],
   output: {
     filename: 'bundle.js',
     path: __dirname + '/public'
@@ -37,5 +38,6 @@ module.exports = {
   devServer: {
     //contentBase: path.join(__dirname, "public"),
     port: 8000
-  }
+  },
+  plugins: [new webpack.HotModuleReplacementPlugin()]
 }

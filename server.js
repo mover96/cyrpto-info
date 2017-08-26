@@ -5,6 +5,15 @@ const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const fetch = require('node-fetch')
 const app = express()
+const config = require('./webpack.config.js')
+const webpack = require('webpack')
+const webpackMiddleware = require('webpack-dev-middleware')
+
+const compiler = webpack(config)
+
+app.use(require('webpack-hot-middleware')(compiler))
+
+app.use(webpackMiddleware(compiler, {}))
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));

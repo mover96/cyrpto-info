@@ -20,6 +20,6 @@ export class App extends React.Component<null, AppState> {
       .then((x: any) => console.log(x))
   }
   public render() {
-    return <div>Here2</div>
+    return <div>Here235678</div>
   }
 }
