@@ -31,13 +31,25 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'))
 })
 
+let saveMarkets = {}
+let lastTime = null
+
 app.get('/wci', (req, res) => {
   //throttle requests
-  fetch(
-    'https://www.worldcoinindex.com/apiservice/json?key=TXQy4zAtd1R27ZIb52rVoQmTq'
-  )
-    .then(WCIres => WCIres.json())
-    .then(coinData => res.json(coinData))
+  if (Date.now() - lastTime > 60000) {
+    console.log('hit')
+    fetch(
+      'https://www.worldcoinindex.com/apiservice/json?key=TXQy4zAtd1R27ZIb52rVoQmTq'
+    )
+      .then(WCIres => WCIres.json())
+      .then(coinData => {
+        saveMarkets = coinData
+        lastTime = Date.now()
+        res.json(coinData)
+      })
+  } else {
+    res.json(saveMarkets)
+  }
 })
 
 app.listen(8000, () => {
