@@ -37,7 +37,7 @@ export class App extends React.Component<null, AppState> {
             const ticker = myCoinObj.ticker
             if (market.Label === ticker) {
               const tempDate = new Date(0)
-              tempDate.setUTCSeconds(market.Timestamp)
+              tempDate.setUTCSeconds(market.Timestamp + 7200)
               const newCoin: CoinInfo = {
                 name: market.Name,
                 ticker: market.Label,
@@ -62,14 +62,25 @@ export class App extends React.Component<null, AppState> {
       }
     )
     return (
-      <div
-        style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          alignContent: 'center'
-        }}
-      >
-        {priceBlocks}
+      <div style={{ margin: '5px' }}>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <h1 className="ms-font-su ms-fontColor-themePrimary">
+            Left Angle Bracket
+          </h1>
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <div
+            style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              justifyContent: 'center',
+              alignItems: 'flex-start',
+              maxWidth: '980px'
+            }}
+          >
+            {priceBlocks}
+          </div>
+        </div>
       </div>
     )
   }

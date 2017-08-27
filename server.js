@@ -11,12 +11,16 @@ const webpackMiddleware = require('webpack-dev-middleware')
 
 const compiler = webpack(config)
 
-app.use(require('webpack-hot-middleware')(compiler))
+const dev = false
 
-app.use(webpackMiddleware(compiler, {}))
+app.set('port', process.env.PORT || 8000)
+if (!dev) {
+} else {
+  app.use(require('webpack-hot-middleware')(compiler))
+  app.use(webpackMiddleware(compiler, {}))
+}
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
@@ -51,6 +55,6 @@ app.get('/wci', (req, res) => {
   }
 })
 
-app.listen(8000, () => {
-  console.log('Server started on port ', 8000)
+app.listen(app.get('port'), () => {
+  console.log('Server started on port ', app.get('port'))
 })
