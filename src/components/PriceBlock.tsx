@@ -58,7 +58,7 @@ export const PriceBlock: React.SFC<PriceBlockProps> = props => {
           style={{
             display: 'flex',
             flexDirection: 'column-reverse',
-            height: '100%',
+            height: '95%',
             justifyContent: 'flex-start'
           }}
         >
