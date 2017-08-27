@@ -5,16 +5,15 @@ const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const fetch = require('node-fetch')
 const app = express()
-const config = require('./webpack.config.js')
 const webpack = require('webpack')
 
-const compiler = webpack(config)
-
-const dev = true
+const dev = false
 
 app.set('port', process.env.PORT || 8000)
 if (!dev) {
 } else {
+  const config = require('./webpack.config.js')
+  const compiler = webpack(config)
   const webpackMiddleware = require('webpack-dev-middleware')
   app.use(require('webpack-hot-middleware')(compiler))
   app.use(webpackMiddleware(compiler, {}))
