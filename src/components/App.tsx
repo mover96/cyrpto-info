@@ -1,8 +1,8 @@
 import * as React from 'react'
-import * as JSONP from 'fetch-jsonp'
+import * as MediaQuery from 'react-responsive'
 
 import { CoinInfo } from '../interfaces/coinInfo'
-import { PriceBlock } from './PriceBlock'
+import { PriceBlockContainer } from './PriceBlockContainer'
 
 export interface AppState {
   coins: CoinInfo[]
@@ -58,29 +58,44 @@ export class App extends React.Component<null, AppState> {
   public render() {
     const priceBlocks = this.state.coins.map(
       (coin: CoinInfo, index: number) => {
-        return <PriceBlock coinInfo={coin} key={index} />
+        return <PriceBlockContainer coinInfo={coin} key={index} />
       }
     )
     return (
       <div style={{ margin: '5px' }}>
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <h1 className="ms-font-su ms-fontColor-themePrimary">
-            Left Angle Bracket
-          </h1>
-        </div>
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <div
-            style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              justifyContent: 'center',
-              alignItems: 'flex-start',
-              maxWidth: '980px'
-            }}
-          >
+        <MediaQuery query="(min-device-width: 400px)">
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <h1 className="ms-font-su ms-fontColor-themePrimary">
+              Left Angle Bracket
+            </h1>
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <div
+              style={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                justifyContent: 'center',
+                alignItems: 'flex-start',
+                maxWidth: '980px'
+              }}
+            >
+              {priceBlocks}
+            </div>
+          </div>
+        </MediaQuery>
+        <MediaQuery query="(max-device-width: 399px)">
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <h1
+              style={{ fontSize: '5em' }}
+              className="ms-font-su ms-fontColor-themePrimary"
+            >
+              Left Angle Bracket
+            </h1>
+          </div>
+          <div style={{}}>
             {priceBlocks}
           </div>
-        </div>
+        </MediaQuery>
       </div>
     )
   }
