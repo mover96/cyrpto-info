@@ -9,12 +9,14 @@ export interface PriceBlockProps {
 export const PriceBlock: React.SFC<PriceBlockProps> = props => {
   return (
     <div style={{ height: '100%' }}>
-      <span
-        style={{ fontSize: '2em' }}
-        className="ms-font-xxl ms-fontColor-themePrimary"
-      >
-        {props.coinInfo.name}
-      </span>
+      <a href={'https://www.worldcoinindex.com/coin/' + props.coinInfo.name}>
+        <span
+          style={{ fontSize: '2em' }}
+          className="ms-font-xxl ms-fontColor-themePrimary"
+        >
+          {props.coinInfo.name}
+        </span>
+      </a>
       <br />
       <br />
       <div style={{ height: '33%' }}>
