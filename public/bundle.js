@@ -2150,7 +2150,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
 exports.PriceBlock = function (props) {
     return (React.createElement("div", { style: { height: '100%' } },
-        React.createElement("a", { href: 'https://www.worldcoinindex.com/coin/' + props.coinInfo.name },
+        React.createElement("a", { style: { textDecoration: 'none' }, href: 'https://www.worldcoinindex.com/coin/' + props.coinInfo.name, target: "_blank" },
             React.createElement("span", { style: { fontSize: '2em' }, className: "ms-font-xxl ms-fontColor-themePrimary" }, props.coinInfo.name)),
         React.createElement("br", null),
         React.createElement("br", null),
