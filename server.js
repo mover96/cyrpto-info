@@ -7,7 +7,6 @@ const fetch = require('node-fetch')
 const app = express()
 const config = require('./webpack.config.js')
 const webpack = require('webpack')
-const webpackMiddleware = require('webpack-dev-middleware')
 
 const compiler = webpack(config)
 
@@ -16,6 +15,7 @@ const dev = false
 app.set('port', process.env.PORT || 8000)
 if (!dev) {
 } else {
+  const webpackMiddleware = require('webpack-dev-middleware')
   app.use(require('webpack-hot-middleware')(compiler))
   app.use(webpackMiddleware(compiler, {}))
 }
