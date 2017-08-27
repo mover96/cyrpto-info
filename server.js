@@ -10,7 +10,7 @@ const webpack = require('webpack')
 
 const compiler = webpack(config)
 
-const dev = false
+const dev = true
 
 app.set('port', process.env.PORT || 8000)
 if (!dev) {
