@@ -13,43 +13,21 @@ export const PriceBlockContainer: React.SFC<
 > = props => {
   return (
     <div>
-      <MediaQuery query="(min-device-width: 400px)">
-        <div
-          style={{
-            width: '300px',
-            minWidth: '300px',
-            borderStyle: 'solid',
-            borderWidth: '3px',
-            height: '300px',
-            margin: '5px',
-            padding: '5px',
-            alignItems: 'center'
-          }}
-          className="ms-borderColor-neutralPrimary ms-borderColor-neutralSecondary--hover"
-        >
-          <PriceBlock coinInfo={props.coinInfo} />
-        </div>
-      </MediaQuery>
-      <MediaQuery query="(max-device-width: 399px)">
-        <div
-          style={{
-            width: '85%',
-            minWidth: '300px',
-            borderStyle: 'solid',
-            borderWidth: '3px',
-            height: '600px',
-            margin: 'auto',
-            paddingBottom: '20px',
-            paddingLeft: '20px',
-            paddingRight: '20px',
-            fontSize: '2em',
-            marginBottom: '40px'
-          }}
-          className="ms-borderColor-neutralPrimary ms-borderColor-neutralSecondary--hover"
-        >
-          <PriceBlock coinInfo={props.coinInfo} />
-        </div>
-      </MediaQuery>
+      <div
+        style={{
+          width: '18em',
+          minWidth: '18em',
+          borderStyle: 'solid',
+          borderWidth: '3px',
+          height: '18em',
+          margin: '5px',
+          padding: '5px',
+          alignItems: 'center'
+        }}
+        className="ms-borderColor-neutralPrimary ms-borderColor-neutralSecondary--hover"
+      >
+        <PriceBlock coinInfo={props.coinInfo} />
+      </div>
     </div>
   )
 }
