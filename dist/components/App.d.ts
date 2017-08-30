@@ -1,5 +1,6 @@
 /// <reference types="react" />
 import * as React from 'react';
+import 'whatwg-fetch';
 import { CoinInfo } from '../interfaces/coinInfo';
 export interface AppState {
     coins: CoinInfo[];

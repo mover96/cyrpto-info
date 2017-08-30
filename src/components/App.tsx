@@ -1,5 +1,6 @@
 import * as React from 'react'
 import * as MediaQuery from 'react-responsive'
+import 'whatwg-fetch'
 
 import { CoinInfo } from '../interfaces/coinInfo'
 import { ResponsiveShell } from './ResponsiveShell'
