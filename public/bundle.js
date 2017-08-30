@@ -2160,7 +2160,7 @@ exports.PriceBlock = function (props) {
                 React.createElement("div", { style: {
                         display: 'flex',
                         flexDirection: 'column-reverse',
-                        height: '5.5em',
+                        height: '5em',
                         justifyContent: 'flex-start'
                     } },
                     React.createElement("span", { style: { wordWrap: 'break-word', fontSize: '.8em', order: 3 }, className: "ms-font-s ms-fontColor-neutralSecondary" },
