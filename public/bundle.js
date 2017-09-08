@@ -161,7 +161,7 @@ var App = (function (_super) {
     App.prototype.getMyCoinInfo = function () {
         return [
             { ticker: 'ADT/BTC', myCoins: 38343.07891198 },
-            { ticker: 'ETH/BTC', myCoins: 5.88493539 },
+            { ticker: 'ETH/BTC', myCoins: 11.7754 },
             { ticker: 'BTC/BTC', myCoins: 0.00000299 },
             { ticker: 'NEO/BTC', myCoins: 9.19 }
         ];
