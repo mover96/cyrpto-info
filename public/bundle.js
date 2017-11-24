@@ -131,7 +131,7 @@ var App = (function (_super) {
                     var ticker = myCoinObj.ticker;
                     if (market.Label === ticker) {
                         var tempDate = new Date(0);
-                        tempDate.setUTCSeconds(market.Timestamp + 7200);
+                        tempDate.setUTCSeconds(market.Timestamp - 7200);
                         var newCoin = {
                             name: market.Name,
                             ticker: market.Label,
@@ -163,7 +163,9 @@ var App = (function (_super) {
             { ticker: 'ADT/BTC', myCoins: 38343.07891198 },
             { ticker: 'ETH/BTC', myCoins: 11.7754 },
             { ticker: 'BTC/BTC', myCoins: 0.00000299 },
-            { ticker: 'NEO/BTC', myCoins: 9.19 }
+            { ticker: 'NEO/BTC', myCoins: 9.19 },
+            { ticker: 'XMR/BTC', myCoins: 0 },
+            { ticker: 'BCH/BTC', myCoins: 0 }
         ];
     };
     return App;
