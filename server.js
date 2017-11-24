@@ -7,7 +7,7 @@ const fetch = require('node-fetch')
 const app = express()
 const webpack = require('webpack')
 
-const dev = false
+const dev = true
 
 app.set('port', process.env.PORT || 8000)
 if (!dev) {
