@@ -38,7 +38,7 @@ export class App extends React.Component<null, AppState> {
             const ticker = myCoinObj.ticker
             if (market.Label === ticker) {
               const tempDate = new Date(0)
-              tempDate.setUTCSeconds(market.Timestamp)
+              tempDate.setUTCSeconds(market.Timestamp - 7200)
               const newCoin: CoinInfo = {
                 name: market.Name,
                 ticker: market.Label,
@@ -77,7 +77,9 @@ export class App extends React.Component<null, AppState> {
       { ticker: 'ADT/BTC', myCoins: 38343.07891198 },
       { ticker: 'ETH/BTC', myCoins: 11.7754 },
       { ticker: 'BTC/BTC', myCoins: 0.00000299 },
-      { ticker: 'NEO/BTC', myCoins: 9.19 }
+      { ticker: 'NEO/BTC', myCoins: 9.19 },
+      { ticker: 'XMR/BTC', myCoins: 0 },
+      { ticker: 'BCH/BTC', myCoins: 0 }
     ]
   }
 }
