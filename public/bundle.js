@@ -131,7 +131,7 @@ var App = (function (_super) {
                     var ticker = myCoinObj.ticker;
                     if (market.Label === ticker) {
                         var tempDate = new Date(0);
-                        tempDate.setUTCSeconds(market.Timestamp - 7200);
+                        tempDate.setUTCSeconds(market.Timestamp - 0);
                         var newCoin = {
                             name: market.Name,
                             ticker: market.Label,
