@@ -4,10 +4,42 @@ const favicon = require('serve-favicon')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const fetch = require('node-fetch')
-const app = express()
 const webpack = require('webpack')
+const passport = require('passport')
+const GoogleStrategy = require('passport-google-oauth20').Strategy
 
 const dev = true
+
+let callbackUrlSet = 'http://leftanglebracket.com/oauthcallback'
+if (dev == true) {
+  callbackUrlSet = 'http://localhost:8000/oauthcallback'
+}
+
+passport.serializeUser(function(user, done) {
+  console.log('hit cb 4')
+  done(null, user)
+})
+
+passport.deserializeUser(function(user, done) {
+  done(null, user)
+})
+
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID:
+        '890927523958-v4h0fo9magi3nohr89kil525mdhq5nr9.apps.googleusercontent.com',
+      clientSecret: 'sxijk9LazvmLsJ_4BzOl1xT6',
+      callbackURL: callbackUrlSet
+    },
+    function(accessToken, refreshToken, profile, cb) {
+      console.log('hit cb 3')
+      return null, profile
+    }
+  )
+)
+
+const app = express()
 
 app.set('port', process.env.PORT || 8000)
 if (!dev) {
@@ -29,9 +61,38 @@ app.use(
   '/react-dom',
   express.static(path.join(__dirname, 'node_modules/react-dom'))
 )
+app.use(passport.initialize())
+app.use(passport.session())
 
-app.get('/', (req, res) => {
+app.get(
+  '/auth/google',
+  passport.authenticate('google', {
+    scope: ['profile', 'email', 'https://www.googleapis.com/auth/drive']
+  })
+)
+
+app.get(
+  '/oauthcallback',
+  passport.authenticate('google', {
+    scope: ['profile', 'email', 'https://www.googleapis.com/auth/drive']
+  }),
+  function(req, res) {
+    // Authenticated successfully
+    res.redirect('http://localhost:8000/')
+  }
+)
+
+app.get('/login', (req, res) => {
+  res.sendFile(path.join(__dirname, 'login.html'))
+})
+
+app.get('/', ensureAuthenticated, (req, res) => {
+  console.log(req.user)
   res.sendFile(path.join(__dirname, 'index.html'))
+})
+
+app.get('/unauthorized', (req, res) => {
+  res.sendFile(path.join(__dirname, 'unauthorized.html'))
 })
 
 let saveMarkets = {}
@@ -57,3 +118,10 @@ app.get('/wci', (req, res) => {
 app.listen(app.get('port'), () => {
   console.log('Server started on port ', app.get('port'))
 })
+
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next()
+  }
+  res.redirect('/login')
+}
