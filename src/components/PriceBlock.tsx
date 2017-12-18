@@ -70,8 +70,11 @@ export const PriceBlock: React.SFC<PriceBlockProps> = props => {
             style={{ wordWrap: 'break-word', fontSize: '1em' }}
             className="ms-font-l"
           >
-            Estimated Value: ${(props.coinInfo.myCoins *
-              props.coinInfo.usdPrice).toFixed(2)}
+            Estimated Value: ${(
+              props.coinInfo.myCoins * props.coinInfo.usdPrice
+            )
+              .toFixed(2)
+              .replace(/(\d)(?=(\d{3})+\.)/g, '$1,')}
           </span>
           <div
             style={{
@@ -85,15 +88,19 @@ export const PriceBlock: React.SFC<PriceBlockProps> = props => {
               style={{ wordWrap: 'break-word', fontSize: '.8em', order: 3 }}
               className="ms-font-s ms-fontColor-neutralSecondary"
             >
-              Volume (24 hours): {props.coinInfo.volume24.toFixed(2)}
+              Volume (24 hours):{' '}
+              {props.coinInfo.volume24
+                .toFixed(2)
+                .replace(/(\d)(?=(\d{3})+\.)/g, '$1,')}
             </span>
             <span
               style={{ wordWrap: 'break-word', fontSize: '.8em', order: 2 }}
               className="ms-font-s ms-fontColor-neutralSecondary"
             >
               Amount (24 hours):{' $'}
-              {(props.coinInfo.volume24 *
-                props.coinInfo.usdPrice).toLocaleString('en-US', {
+              {(
+                props.coinInfo.volume24 * props.coinInfo.usdPrice
+              ).toLocaleString('en-US', {
                 minimumFractionDigits: 2
               })}
             </span>
