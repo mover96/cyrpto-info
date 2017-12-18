@@ -16,7 +16,6 @@ if (dev == true) {
 }
 
 passport.serializeUser(function(user, done) {
-  console.log('hit cb 4')
   done(null, user)
 })
 
@@ -33,8 +32,7 @@ passport.use(
       callbackURL: callbackUrlSet
     },
     function(accessToken, refreshToken, profile, cb) {
-      console.log('hit cb 3')
-      return null, profile
+      return cb(null, profile)
     }
   )
 )
@@ -42,6 +40,7 @@ passport.use(
 const app = express()
 
 app.set('port', process.env.PORT || 8000)
+
 if (!dev) {
 } else {
   const config = require('./webpack.config.js')
@@ -52,9 +51,17 @@ if (!dev) {
 }
 
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
+app.use(require('morgan')('combined'))
+app.use(require('cookie-parser')())
+app.use(require('body-parser').urlencoded({ extended: true }))
+app.use(
+  require('express-session')({
+    secret: 'keyboard cat',
+    resave: true,
+    saveUninitialized: true
+  })
+)
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 app.use('/react', express.static(path.join(__dirname, 'node_modules/react')))
 app.use(
@@ -64,31 +71,24 @@ app.use(
 app.use(passport.initialize())
 app.use(passport.session())
 
-app.get(
-  '/auth/google',
-  passport.authenticate('google', {
-    scope: ['profile', 'email', 'https://www.googleapis.com/auth/drive']
-  })
-)
+app.get('/auth/google', passport.authenticate('google', { scope: ['profile'] }))
 
 app.get(
   '/oauthcallback',
-  passport.authenticate('google', {
-    scope: ['profile', 'email', 'https://www.googleapis.com/auth/drive']
-  }),
+  passport.authenticate('google', { failureRedirect: '/login' }),
   function(req, res) {
     // Authenticated successfully
-    res.redirect('http://localhost:8000/')
+    res.redirect('/')
   }
 )
 
-app.get('/login', (req, res) => {
-  res.sendFile(path.join(__dirname, 'login.html'))
-})
-
 app.get('/', ensureAuthenticated, (req, res) => {
   console.log(req.user)
-  res.sendFile(path.join(__dirname, 'index.html'))
+  if (req.user.id == '102655073361673537883') {
+    res.sendFile(path.join(__dirname, 'index.html'))
+  } else {
+    res.sendFile(path.join(__dirname, 'unauthorized.html'))
+  }
 })
 
 app.get('/unauthorized', (req, res) => {
@@ -123,5 +123,5 @@ function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     return next()
   }
-  res.redirect('/login')
+  res.redirect('/auth/google')
 }
