@@ -75,11 +75,11 @@ export class App extends React.Component<null, AppState> {
   private getMyCoinInfo(): any {
     return [
       { ticker: 'ADT/BTC', myCoins: 38343.07891198 },
-      { ticker: 'ETH/BTC', myCoins: 11.7192 },
+      { ticker: 'ETH/BTC', myCoins: 11.7218 },
       { ticker: 'BTC/BTC', myCoins: 0.00000299 },
-      { ticker: 'NEO/BTC', myCoins: 9.19 },
+      { ticker: 'NEO/BTC', myCoins: 2.19 },
       { ticker: 'XMR/BTC', myCoins: 0 },
-      { ticker: 'BCH/BTC', myCoins: 0 }
+      { ticker: 'XVG/BTC', myCoins: 4140.755 }
     ]
   }
 }
