@@ -18,21 +18,21 @@ export const ResponsiveShell: React.SFC<ResponsiveShellProps> = props => {
     return <PriceBlock coinInfo={coin} key={index} />
   })
   let mitchellStyle = {
-    paddingRight: '15px',
+    paddingRight: '40px',
     textDecoration: 'underline',
     cursor: 'pointer'
   }
   let kevinStyle = { textDecoration: 'none', cursor: 'pointer' }
   if (props.view === 1) {
     mitchellStyle = {
-      paddingRight: '15px',
+      paddingRight: '40px',
       textDecoration: 'none',
       cursor: 'pointer'
     }
     kevinStyle = { textDecoration: 'underline', cursor: 'pointer' }
   } else {
     mitchellStyle = {
-      paddingRight: '15px',
+      paddingRight: '40px',
       textDecoration: 'underline',
       cursor: 'pointer'
     }
@@ -53,7 +53,7 @@ export const ResponsiveShell: React.SFC<ResponsiveShellProps> = props => {
           display: 'flex',
           justifyContent: 'center',
           marginBottom: '10px',
-          fontSize: '1.5em'
+          fontSize: '1.3em'
         }}
         className="ms-font-l ms-fontColor-themePrimary"
       >
