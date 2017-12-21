@@ -84,7 +84,7 @@ app.get(
 
 app.get('/', ensureAuthenticated, (req, res) => {
   console.log(req.user)
-  if (req.user.id == '102655073361673537883') {
+  if (req.user.id == '102655073361673537883' || '103259939309927820028') {
     res.sendFile(path.join(__dirname, 'index.html'))
   } else {
     res.sendFile(path.join(__dirname, 'unauthorized.html'))
