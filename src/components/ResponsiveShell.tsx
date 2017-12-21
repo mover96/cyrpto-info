@@ -52,7 +52,8 @@ export const ResponsiveShell: React.SFC<ResponsiveShellProps> = props => {
         style={{
           display: 'flex',
           justifyContent: 'center',
-          marginBottom: '10px'
+          marginBottom: '10px',
+          fontSize: '1.5em'
         }}
         className="ms-font-l ms-fontColor-themePrimary"
       >
