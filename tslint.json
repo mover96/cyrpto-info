@@ -9,7 +9,9 @@
     "no-console": [false],
     "interface-name": [true, "never-prefix"],
     "quotemark": [false],
-    "no-bitwise": false
+    "no-bitwise": false,
+    "jsx-no-lambda": false,
+    "jsx-no-bind": false
   },
   "rulesDirectory": []
 }

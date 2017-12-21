@@ -4,6 +4,8 @@ import 'whatwg-fetch';
 import { CoinInfo } from '../interfaces/coinInfo';
 export interface AppState {
     coins: CoinInfo[];
+    kevinCoins: CoinInfo[];
+    view: number;
 }
 export interface Market {
     Label: string;
@@ -21,5 +23,7 @@ export declare class App extends React.Component<null, AppState> {
     constructor(props: any);
     componentDidMount(): void;
     render(): JSX.Element;
+    changeView(view: number): void;
     private getMyCoinInfo();
+    private getKevinCoinInfo();
 }

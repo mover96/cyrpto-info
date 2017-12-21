@@ -5,6 +5,8 @@ import { CoinInfo } from '../interfaces/coinInfo'
 
 export interface ResponsiveShellProps {
   coins: CoinInfo[]
+  changeView: (view: number) => void
+  view: number
 }
 
 export const ResponsiveShell: React.SFC<ResponsiveShellProps> = props => {
@@ -15,6 +17,27 @@ export const ResponsiveShell: React.SFC<ResponsiveShellProps> = props => {
   const priceBlocks = props.coins.map((coin: CoinInfo, index: number) => {
     return <PriceBlock coinInfo={coin} key={index} />
   })
+  let mitchellStyle = {
+    paddingRight: '15px',
+    textDecoration: 'underline',
+    cursor: 'pointer'
+  }
+  let kevinStyle = { textDecoration: 'none', cursor: 'pointer' }
+  if (props.view === 1) {
+    mitchellStyle = {
+      paddingRight: '15px',
+      textDecoration: 'none',
+      cursor: 'pointer'
+    }
+    kevinStyle = { textDecoration: 'underline', cursor: 'pointer' }
+  } else {
+    mitchellStyle = {
+      paddingRight: '15px',
+      textDecoration: 'underline',
+      cursor: 'pointer'
+    }
+    kevinStyle = { textDecoration: 'none', cursor: 'pointer' }
+  }
   return (
     <div style={{ margin: '5px' }}>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -24,6 +47,31 @@ export const ResponsiveShell: React.SFC<ResponsiveShellProps> = props => {
         >
           Left Angle Bracket
         </h1>
+      </div>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          marginBottom: '10px'
+        }}
+        className="ms-font-l ms-fontColor-themePrimary"
+      >
+        <a
+          style={mitchellStyle}
+          onClick={() => {
+            props.changeView(0)
+          }}
+        >
+          Mitchell
+        </a>
+        <a
+          style={kevinStyle}
+          onClick={() => {
+            props.changeView(1)
+          }}
+        >
+          Kevin
+        </a>
       </div>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         <div

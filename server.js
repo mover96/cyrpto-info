@@ -7,6 +7,8 @@ const fetch = require('node-fetch')
 const webpack = require('webpack')
 const passport = require('passport')
 const GoogleStrategy = require('passport-google-oauth20').Strategy
+const fs = require('fs')
+const bufReplace = require('buffer-replace')
 
 const dev = true
 
@@ -83,16 +85,15 @@ app.get(
 )
 
 app.get('/', ensureAuthenticated, (req, res) => {
-  console.log(req.user)
   if (req.user.id == '102655073361673537883' || '103259939309927820028') {
     res.sendFile(path.join(__dirname, 'index.html'))
   } else {
-    res.sendFile(path.join(__dirname, 'unauthorized.html'))
+    let data = fs.readFileSync(path.join(__dirname, 'unauthorized.html'))
+    data = data.toString().replace('g_id_replace', req.user.id)
+    res.writeHead(200, { 'Content-Type': 'text/html' })
+    res.write(data)
+    res.end()
   }
-})
-
-app.get('/unauthorized', (req, res) => {
-  res.sendFile(path.join(__dirname, 'unauthorized.html'))
 })
 
 let saveMarkets = {}

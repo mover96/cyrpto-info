@@ -15,6 +15,7 @@
     "@types/react-responsive": "^1.1.8",
     "@types/webpack-env": "^1.13.0",
     "body-parser": "^1.17.2",
+    "buffer-replace": "^1.0.0",
     "cookie-parser": "^1.4.3",
     "express": "^4.15.4",
     "express-session": "^1.15.6",
