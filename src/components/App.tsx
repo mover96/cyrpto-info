@@ -38,7 +38,8 @@ export class App extends React.Component<null, AppState> {
     setInterval(() => this.getWCI(), 60000)
   }
   public async getWCI() {
-    this.setState({ coins: [] })
+    const newCoinState: CoinInfo[] = []
+    const newKevinCoinState: CoinInfo[] = []
     console.log('fetching')
     fetch('/wci')
       .then((res: any) => res.json())
@@ -60,9 +61,7 @@ export class App extends React.Component<null, AppState> {
                 investment: myCoinObj.investment,
                 owner: 'mitchell'
               }
-              const newCoinState = this.state.coins
               newCoinState.push(newCoin)
-              this.setState({ coins: newCoinState })
             }
           }
 
@@ -82,11 +81,11 @@ export class App extends React.Component<null, AppState> {
                 investment: myCoinObj.investment,
                 owner: 'kevin'
               }
-              const newKevinCoinState = this.state.kevinCoins
               newKevinCoinState.push(newCoin)
-              this.setState({ kevinCoins: newKevinCoinState })
             }
           }
+          this.setState({ coins: newCoinState })
+          this.setState({ kevinCoins: newKevinCoinState })
         }
       })
   }
