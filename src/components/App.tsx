@@ -34,6 +34,11 @@ export class App extends React.Component<null, AppState> {
     }
   }
   public componentDidMount() {
+    this.getWCI()
+    setInterval(() => this.getWCI(), 60000)
+  }
+  public async getWCI() {
+    console.log('fetching')
     fetch('/wci')
       .then((res: any) => res.json())
       .then((marketsObj: { Markets: Market[] }) => {
@@ -51,6 +56,7 @@ export class App extends React.Component<null, AppState> {
                 volume24: market.Volume_24h,
                 timestamp: tempDate,
                 myCoins: myCoinObj.myCoins,
+                investment: myCoinObj.investment,
                 owner: 'mitchell'
               }
               const newCoinState = this.state.coins
@@ -72,6 +78,7 @@ export class App extends React.Component<null, AppState> {
                 volume24: market.Volume_24h,
                 timestamp: tempDate,
                 myCoins: myCoinObj.myCoins,
+                investment: myCoinObj.investment,
                 owner: 'kevin'
               }
               const newKevinCoinState = this.state.kevinCoins
@@ -82,6 +89,7 @@ export class App extends React.Component<null, AppState> {
         }
       })
   }
+
   public render() {
     let el = (
       <ResponsiveShell
@@ -117,19 +125,19 @@ export class App extends React.Component<null, AppState> {
 
   private getMyCoinInfo(): any {
     return [
-      { ticker: 'ADT/BTC', myCoins: 38343.07891198 },
-      { ticker: 'ETH/BTC', myCoins: 8.7118 },
-      { ticker: 'BTC/BTC', myCoins: 0.00000299 },
-      { ticker: 'NEO/BTC', myCoins: 2.19 },
-      { ticker: 'ICX/BTC', myCoins: 423.34623 },
-      { ticker: 'XMR/BTC', myCoins: 1.946 }
+      { ticker: 'ADT/BTC', myCoins: 38343.07891198, investment: 2000 },
+      { ticker: 'ETH/BTC', myCoins: 8.7118, investment: 3000 - 2150 },
+      { ticker: 'BTC/BTC', myCoins: 0.00000299, investment: 0.01 },
+      { ticker: 'NEO/BTC', myCoins: 2.19, investment: 500 - 430 },
+      { ticker: 'ICX/BTC', myCoins: 423.34623, investment: 2150 },
+      { ticker: 'XMR/BTC', myCoins: 1.946, investment: 654 }
     ]
   }
 
   private getKevinCoinInfo(): any {
     return [
-      { ticker: 'ETH/BTC', myCoins: 0.19357 },
-      { ticker: 'XVG/BTC', myCoins: 10489.5 }
+      { ticker: 'ETH/BTC', myCoins: 0.19357, investment: 0 },
+      { ticker: 'XVG/BTC', myCoins: 10489.5, investment: 0 }
     ]
   }
 }

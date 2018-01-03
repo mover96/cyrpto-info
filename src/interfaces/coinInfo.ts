@@ -6,5 +6,6 @@ export interface CoinInfo {
   volume24: number
   timestamp: Date
   myCoins: number
+  investment: number
   owner: string
 }

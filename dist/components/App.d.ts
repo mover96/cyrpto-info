@@ -22,6 +22,7 @@ export interface Market {
 export declare class App extends React.Component<null, AppState> {
     constructor(props: any);
     componentDidMount(): void;
+    getWCI(): Promise<void>;
     render(): JSX.Element;
     changeView(view: number): void;
     private getMyCoinInfo();
