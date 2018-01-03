@@ -3,6 +3,7 @@ import * as React from 'react'
 import { PriceBlock } from './PriceBlock'
 import { CoinInfo } from '../interfaces/coinInfo'
 import { UserSwitch } from './UserSwitch'
+import { Blocks } from './Blocks'
 
 export interface ResponsiveShellProps {
   coins: CoinInfo[]
@@ -29,19 +30,7 @@ export const ResponsiveShell: React.SFC<ResponsiveShellProps> = props => {
         </h1>
       </div>
       <UserSwitch changeView={props.changeView} view={props.view} />
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <div
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: 'center',
-            alignItems: 'flex-start',
-            maxWidth: '980px'
-          }}
-        >
-          {priceBlocks}
-        </div>
-      </div>
+      <Blocks coins={props.coins} />
       <span
         style={{
           wordWrap: 'break-word',

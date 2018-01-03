@@ -1,8 +1,5 @@
 import * as React from 'react'
 
-import { PriceBlock } from './PriceBlock'
-import { CoinInfo } from '../interfaces/coinInfo'
-
 export interface UserSwitchProps {
   changeView: (view: number) => void
   view: number
