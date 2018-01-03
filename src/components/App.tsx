@@ -38,6 +38,7 @@ export class App extends React.Component<null, AppState> {
     setInterval(() => this.getWCI(), 60000)
   }
   public async getWCI() {
+    this.setState({ coins: [] })
     console.log('fetching')
     fetch('/wci')
       .then((res: any) => res.json())
