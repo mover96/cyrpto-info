@@ -18,27 +18,6 @@ export const ResponsiveShell: React.SFC<ResponsiveShellProps> = props => {
   const priceBlocks = props.coins.map((coin: CoinInfo, index: number) => {
     return <PriceBlock coinInfo={coin} key={index} />
   })
-  let mitchellStyle = {
-    paddingRight: '40px',
-    textDecoration: 'underline',
-    cursor: 'pointer'
-  }
-  let kevinStyle = { textDecoration: 'none', cursor: 'pointer' }
-  if (props.view === 1) {
-    mitchellStyle = {
-      paddingRight: '40px',
-      textDecoration: 'none',
-      cursor: 'pointer'
-    }
-    kevinStyle = { textDecoration: 'underline', cursor: 'pointer' }
-  } else {
-    mitchellStyle = {
-      paddingRight: '40px',
-      textDecoration: 'underline',
-      cursor: 'pointer'
-    }
-    kevinStyle = { textDecoration: 'none', cursor: 'pointer' }
-  }
   return (
     <div style={{ margin: '5px' }}>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
