@@ -122,7 +122,7 @@ export class App extends React.Component<null, AppState> {
       { ticker: 'BTC/BTC', myCoins: 0.00000299 },
       { ticker: 'NEO/BTC', myCoins: 2.19 },
       { ticker: 'ICX/BTC', myCoins: 423.34623 },
-      { ticker: 'XVG/BTC', myCoins: 4140.755 }
+      { ticker: 'XMR/BTC', myCoins: 1.946 }
     ]
   }
 

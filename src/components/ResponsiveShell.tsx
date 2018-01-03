@@ -2,6 +2,7 @@ import * as React from 'react'
 
 import { PriceBlock } from './PriceBlock'
 import { CoinInfo } from '../interfaces/coinInfo'
+import { UserSwitch } from './UserSwitch'
 
 export interface ResponsiveShellProps {
   coins: CoinInfo[]
@@ -48,32 +49,7 @@ export const ResponsiveShell: React.SFC<ResponsiveShellProps> = props => {
           Left Angle Bracket
         </h1>
       </div>
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          marginBottom: '10px',
-          fontSize: '1.3em'
-        }}
-        className="ms-font-l ms-fontColor-themePrimary"
-      >
-        <a
-          style={mitchellStyle}
-          onClick={() => {
-            props.changeView(0)
-          }}
-        >
-          Mitchell
-        </a>
-        <a
-          style={kevinStyle}
-          onClick={() => {
-            props.changeView(1)
-          }}
-        >
-          Kevin
-        </a>
-      </div>
+      <UserSwitch changeView={props.changeView} view={props.view} />
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         <div
           style={{
