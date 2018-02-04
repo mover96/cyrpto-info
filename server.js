@@ -80,14 +80,20 @@ app.get(
   passport.authenticate('google', { failureRedirect: '/login' }),
   function(req, res) {
     // Authenticated successfully
-    res.header('X-Frame-Options', 'ALLOW-FROM http://localhost:8000/')
+    res.header(
+      'X-Frame-Options',
+      'ALLOW-FROM http://localhost:8000/ http://mover.codes'
+    )
     res.redirect('/')
   }
 )
 
 app.get('/', ensureAuthenticated, (req, res) => {
   if (req.user.id == '102655073361673537883' || '103259939309927820028') {
-    res.header('X-Frame-Options', 'ALLOW-FROM http://localhost:8000/')
+    res.header(
+      'X-Frame-Options',
+      'ALLOW-FROM http://localhost:8000/ http://mover.codes'
+    )
     res.sendFile(path.join(__dirname, 'index.html'))
   } else {
     let data = fs.readFileSync(path.join(__dirname, 'unauthorized.html'))
