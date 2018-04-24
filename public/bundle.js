@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -71,110 +71,6 @@ module.exports = React;
 
 /***/ }),
 /* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(2);
-
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var React = __webpack_require__(0);
-var ReactDOM = __webpack_require__(3);
-var App_1 = __webpack_require__(4);
-ReactDOM.render(React.createElement(App_1.App, null), document.getElementById('root'));
-if (false) {
-    module.hot.accept();
-}
-
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports) {
-
-module.exports = ReactDOM;
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var tslib_1 = __webpack_require__(5);
-var React = __webpack_require__(0);
-var MediaQuery = __webpack_require__(6);
-__webpack_require__(7);
-var ResponsiveShell_1 = __webpack_require__(8);
-var App = (function (_super) {
-    tslib_1.__extends(App, _super);
-    function App(props) {
-        var _this = _super.call(this, props) || this;
-        _this.state = {
-            coins: []
-        };
-        return _this;
-    }
-    App.prototype.componentDidMount = function () {
-        var _this = this;
-        fetch('/wci')
-            .then(function (res) { return res.json(); })
-            .then(function (marketsObj) {
-            for (var _i = 0, _a = marketsObj.Markets; _i < _a.length; _i++) {
-                var market = _a[_i];
-                for (var _b = 0, _c = _this.getMyCoinInfo(); _b < _c.length; _b++) {
-                    var myCoinObj = _c[_b];
-                    var ticker = myCoinObj.ticker;
-                    if (market.Label === ticker) {
-                        var tempDate = new Date(0);
-                        tempDate.setUTCSeconds(market.Timestamp - 0);
-                        var newCoin = {
-                            name: market.Name,
-                            ticker: market.Label,
-                            btcPrice: market.Price_btc,
-                            usdPrice: market.Price_usd,
-                            volume24: market.Volume_24h,
-                            timestamp: tempDate,
-                            myCoins: myCoinObj.myCoins
-                        };
-                        var newCoinState = _this.state.coins;
-                        newCoinState.push(newCoin);
-                        _this.setState({ coins: newCoinState });
-                    }
-                }
-            }
-        });
-    };
-    App.prototype.render = function () {
-        return (React.createElement("div", null,
-            React.createElement(MediaQuery, { query: "(min-device-width: 400px)" },
-                React.createElement("div", { style: { fontSize: '1em' } },
-                    React.createElement(ResponsiveShell_1.ResponsiveShell, { coins: this.state.coins }))),
-            React.createElement(MediaQuery, { query: "(max-device-width: 399px)" },
-                React.createElement("div", { style: { fontSize: '2.5em' } },
-                    React.createElement(ResponsiveShell_1.ResponsiveShell, { coins: this.state.coins })))));
-    };
-    App.prototype.getMyCoinInfo = function () {
-        return [
-            { ticker: 'ADT/BTC', myCoins: 38343.07891198 },
-            { ticker: 'ETH/BTC', myCoins: 11.7754 },
-            { ticker: 'BTC/BTC', myCoins: 0.00000299 },
-            { ticker: 'NEO/BTC', myCoins: 9.19 },
-            { ticker: 'XMR/BTC', myCoins: 0 },
-            { ticker: 'BCH/BTC', myCoins: 0 }
-        ];
-    };
-    return App;
-}(React.Component));
-exports.App = App;
-
-
-/***/ }),
-/* 5 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -358,7 +254,219 @@ function __asyncValues(o) {
 }
 
 /***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = __webpack_require__(0);
+exports.PriceBlock = function (props) {
+    return (React.createElement("div", { style: { height: '100%' } },
+        React.createElement("a", { style: { textDecoration: 'none' }, href: 'https://www.worldcoinindex.com/coin/' + props.coinInfo.name, target: "_blank" },
+            React.createElement("span", { style: { fontSize: '2em' }, className: "ms-font-xxl ms-fontColor-themePrimary" }, props.coinInfo.name)),
+        React.createElement("br", null),
+        React.createElement("br", null),
+        React.createElement("div", { style: { height: '33%' } },
+            React.createElement("span", { style: { wordWrap: 'break-word', fontSize: '1em' }, className: "ms-font-l" }, props.coinInfo.ticker),
+            React.createElement("hr", null),
+            React.createElement("span", { style: { wordWrap: 'break-word', fontSize: '1em' }, className: "ms-font-l" },
+                "USD: ",
+                props.coinInfo.usdPrice),
+            React.createElement("br", null),
+            React.createElement("span", { style: { wordWrap: 'break-word', fontSize: '1em' }, className: "ms-font-l" },
+                "BTC: ",
+                props.coinInfo.btcPrice),
+            React.createElement("br", null),
+            React.createElement("br", null),
+            React.createElement("span", { style: { wordWrap: 'break-word', fontSize: '1em' }, className: "ms-font-l" },
+                "Coins Owned: ",
+                props.coinInfo.myCoins),
+            React.createElement("br", null),
+            React.createElement("span", { style: { wordWrap: 'break-word', fontSize: '1em' }, className: "ms-font-l" },
+                "Estimated Value: $",
+                (props.coinInfo.myCoins * props.coinInfo.usdPrice)
+                    .toFixed(2)
+                    .replace(/(\d)(?=(\d{3})+\.)/g, '$1,')),
+            React.createElement("div", { style: {
+                    display: 'flex',
+                    flexDirection: 'column-reverse',
+                    height: '5em',
+                    justifyContent: 'flex-start'
+                } },
+                React.createElement("span", { style: { wordWrap: 'break-word', fontSize: '.8em', order: 3 }, className: "ms-font-s ms-fontColor-neutralSecondary" },
+                    "Volume (24 hours):",
+                    ' ',
+                    props.coinInfo.volume24
+                        .toFixed(2)
+                        .replace(/(\d)(?=(\d{3})+\.)/g, '$1,')),
+                React.createElement("span", { style: { wordWrap: 'break-word', fontSize: '.8em', order: 2 }, className: "ms-font-s ms-fontColor-neutralSecondary" },
+                    "Amount (24 hours):",
+                    ' $',
+                    (props.coinInfo.volume24 * props.coinInfo.usdPrice).toLocaleString('en-US', {
+                        minimumFractionDigits: 2
+                    })),
+                React.createElement("span", { style: { wordWrap: 'break-word', fontSize: '.8em' }, className: "ms-font-s ms-fontColor-neutralSecondary" },
+                    "Time Updated: ",
+                    props.coinInfo.timestamp.toLocaleTimeString())))));
+};
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(4);
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = __webpack_require__(0);
+var ReactDOM = __webpack_require__(5);
+var App_1 = __webpack_require__(6);
+ReactDOM.render(React.createElement(App_1.App, null), document.getElementById('root'));
+if (false) {
+    module.hot.accept();
+}
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports) {
+
+module.exports = ReactDOM;
+
+/***/ }),
 /* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var tslib_1 = __webpack_require__(1);
+var React = __webpack_require__(0);
+var MediaQuery = __webpack_require__(7);
+__webpack_require__(8);
+var ResponsiveShell_1 = __webpack_require__(9);
+var App = (function (_super) {
+    tslib_1.__extends(App, _super);
+    function App(props) {
+        var _this = _super.call(this, props) || this;
+        _this.state = {
+            coins: [],
+            kevinCoins: [],
+            view: 0
+        };
+        return _this;
+    }
+    App.prototype.componentDidMount = function () {
+        var _this = this;
+        this.getWCI();
+        setInterval(function () { return _this.getWCI(); }, 60000);
+    };
+    App.prototype.getWCI = function () {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            var newCoinState, newKevinCoinState;
+            return tslib_1.__generator(this, function (_a) {
+                newCoinState = [];
+                newKevinCoinState = [];
+                console.log('fetching');
+                fetch('/wci')
+                    .then(function (res) { return res.json(); })
+                    .then(function (marketsObj) {
+                    for (var _i = 0, _a = marketsObj.Markets; _i < _a.length; _i++) {
+                        var market = _a[_i];
+                        for (var _b = 0, _c = _this.getMyCoinInfo(); _b < _c.length; _b++) {
+                            var myCoinObj = _c[_b];
+                            var ticker = myCoinObj.ticker;
+                            if (market.Label === ticker) {
+                                var tempDate = new Date(0);
+                                tempDate.setUTCSeconds(market.Timestamp - 0);
+                                var newCoin = {
+                                    name: market.Name,
+                                    ticker: market.Label,
+                                    btcPrice: market.Price_btc,
+                                    usdPrice: market.Price_usd,
+                                    volume24: market.Volume_24h,
+                                    timestamp: tempDate,
+                                    myCoins: myCoinObj.myCoins,
+                                    investment: myCoinObj.investment,
+                                    owner: 'mitchell'
+                                };
+                                newCoinState.push(newCoin);
+                            }
+                        }
+                        for (var _d = 0, _e = _this.getKevinCoinInfo(); _d < _e.length; _d++) {
+                            var myCoinObj = _e[_d];
+                            var ticker = myCoinObj.ticker;
+                            if (market.Label === ticker) {
+                                var tempDate = new Date(0);
+                                tempDate.setUTCSeconds(market.Timestamp - 0);
+                                var newCoin = {
+                                    name: market.Name,
+                                    ticker: market.Label,
+                                    btcPrice: market.Price_btc,
+                                    usdPrice: market.Price_usd,
+                                    volume24: market.Volume_24h,
+                                    timestamp: tempDate,
+                                    myCoins: myCoinObj.myCoins,
+                                    investment: myCoinObj.investment,
+                                    owner: 'kevin'
+                                };
+                                newKevinCoinState.push(newCoin);
+                            }
+                        }
+                        _this.setState({ coins: newCoinState });
+                        _this.setState({ kevinCoins: newKevinCoinState });
+                    }
+                });
+                return [2 /*return*/];
+            });
+        });
+    };
+    App.prototype.render = function () {
+        var el = (React.createElement(ResponsiveShell_1.ResponsiveShell, { coins: this.state.coins, changeView: this.changeView.bind(this), view: this.state.view }));
+        if (this.state.view === 1) {
+            el = (React.createElement(ResponsiveShell_1.ResponsiveShell, { coins: this.state.kevinCoins, changeView: this.changeView.bind(this), view: this.state.view }));
+        }
+        return (React.createElement("div", null,
+            React.createElement(MediaQuery, { query: "(min-device-width: 400px)" },
+                React.createElement("div", { style: { fontSize: '1em' } }, el)),
+            React.createElement(MediaQuery, { query: "(max-device-width: 399px)" },
+                React.createElement("div", { style: { fontSize: '2.5em' } }, el))));
+    };
+    App.prototype.changeView = function (view) {
+        this.setState({ view: view });
+    };
+    App.prototype.getMyCoinInfo = function () {
+        return [
+            { ticker: 'ADT/BTC', myCoins: 38281, investment: 2038.28 },
+            { ticker: 'ETH/BTC', myCoins: 7.7083, investment: 0 },
+            { ticker: 'BTC/BTC', myCoins: 0.00000299, investment: 0.01 },
+            { ticker: 'NEO/BTC', myCoins: 0.19, investment: 0 },
+            { ticker: 'ICX/BTC', myCoins: 524.86, investment: 3168.41 },
+            { ticker: 'TRX/BTC', myCoins: 3771, investment: 914.21 }
+        ];
+    };
+    App.prototype.getKevinCoinInfo = function () {
+        return [
+            { ticker: 'ETH/BTC', myCoins: 0.19357, investment: 0 },
+            { ticker: 'XVG/BTC', myCoins: 10489.5, investment: 0 }
+        ];
+    };
+    return App;
+}(React.Component));
+exports.App = App;
+
+
+/***/ }),
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -2090,7 +2198,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports) {
 
 (function(self) {
@@ -2557,33 +2665,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var React = __webpack_require__(0);
-var PriceBlock_1 = __webpack_require__(9);
-exports.ResponsiveShell = function (props) {
-    var priceBlocks = props.coins.map(function (coin, index) {
-        return React.createElement(PriceBlock_1.PriceBlock, { coinInfo: coin, key: index });
-    });
-    return (React.createElement("div", { style: { margin: '5px' } },
-        React.createElement("div", { style: { display: 'flex', justifyContent: 'center' } },
-            React.createElement("h1", { style: { fontSize: '2.5em' }, className: "ms-font-su ms-fontColor-themePrimary" }, "Left Angle Bracket")),
-        React.createElement("div", { style: { display: 'flex', justifyContent: 'center' } },
-            React.createElement("div", { style: {
-                    display: 'flex',
-                    flexWrap: 'wrap',
-                    justifyContent: 'center',
-                    alignItems: 'flex-start',
-                    maxWidth: '980px'
-                } }, priceBlocks))));
-};
-
-
-/***/ }),
 /* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2591,61 +2672,211 @@ exports.ResponsiveShell = function (props) {
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
-exports.PriceBlock = function (props) {
+var PriceBlock_1 = __webpack_require__(2);
+var UserSwitch_1 = __webpack_require__(10);
+var Blocks_1 = __webpack_require__(11);
+exports.ResponsiveShell = function (props) {
+    var totalPrice = 0;
+    props.coins.forEach(function (coin) {
+        totalPrice += coin.myCoins * coin.usdPrice;
+    });
+    var priceBlocks = props.coins.map(function (coin, index) {
+        return React.createElement(PriceBlock_1.PriceBlock, { coinInfo: coin, key: index });
+    });
+    return (React.createElement("div", { style: { margin: '5px' } },
+        React.createElement("div", { style: { display: 'flex', justifyContent: 'center' } },
+            React.createElement("h1", { style: { fontSize: '2.5em' }, className: "ms-font-su ms-fontColor-themePrimary" }, "Left Angle Bracket")),
+        React.createElement(UserSwitch_1.UserSwitch, { changeView: props.changeView, view: props.view }),
+        React.createElement(Blocks_1.Blocks, { coins: props.coins }),
+        React.createElement("span", { style: {
+                wordWrap: 'break-word',
+                fontSize: '1.3em',
+                display: 'flex',
+                justifyContent: 'center',
+                paddingTop: '2em',
+                paddingBottom: '2em'
+            }, className: "ms-font-l" },
+            "Total Estimated Value = $",
+            totalPrice
+                .toFixed(2)
+                .replace(/(\d)(?=(\d{3})+\.)/g, '$1,'))));
+};
+
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = __webpack_require__(0);
+exports.UserSwitch = function (props) {
+    var mitchellStyle = {
+        paddingRight: '40px',
+        textDecoration: 'underline',
+        cursor: 'pointer'
+    };
+    var kevinStyle = { textDecoration: 'none', cursor: 'pointer' };
+    if (props.view === 1) {
+        mitchellStyle = {
+            paddingRight: '40px',
+            textDecoration: 'none',
+            cursor: 'pointer'
+        };
+        kevinStyle = { textDecoration: 'underline', cursor: 'pointer' };
+    }
+    else {
+        mitchellStyle = {
+            paddingRight: '40px',
+            textDecoration: 'underline',
+            cursor: 'pointer'
+        };
+        kevinStyle = { textDecoration: 'none', cursor: 'pointer' };
+    }
     return (React.createElement("div", { style: {
-            width: '18em',
-            minWidth: '18em',
-            borderStyle: 'solid',
-            borderWidth: '.2em',
-            height: '18em',
-            margin: '.5em',
-            padding: '.5em',
-            alignItems: 'center'
-        }, className: "ms-borderColor-neutralPrimary ms-borderColor-neutralSecondary--hover" },
-        React.createElement("div", { style: { height: '100%' } },
-            React.createElement("a", { style: { textDecoration: 'none' }, href: 'https://www.worldcoinindex.com/coin/' + props.coinInfo.name, target: "_blank" },
-                React.createElement("span", { style: { fontSize: '2em' }, className: "ms-font-xxl ms-fontColor-themePrimary" }, props.coinInfo.name)),
+            display: 'flex',
+            justifyContent: 'center',
+            marginBottom: '10px',
+            fontSize: '1.3em'
+        }, className: "ms-font-l ms-fontColor-themePrimary" },
+        React.createElement("a", { style: mitchellStyle, onClick: function () {
+                props.changeView(0);
+            } }, "Mitchell"),
+        React.createElement("a", { style: kevinStyle, onClick: function () {
+                props.changeView(1);
+            } }, "Kevin")));
+};
+
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = __webpack_require__(0);
+var Block_1 = __webpack_require__(12);
+exports.Blocks = function (props) {
+    var blocks = props.coins.map(function (coin, index) {
+        return React.createElement(Block_1.Block, { coinInfo: coin, key: index });
+    });
+    return (React.createElement("div", { style: { display: 'flex', justifyContent: 'center' } },
+        React.createElement("div", { style: {
+                display: 'flex',
+                flexWrap: 'wrap',
+                justifyContent: 'center',
+                alignItems: 'flex-start',
+                maxWidth: '980px'
+            } }, blocks)));
+};
+
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var tslib_1 = __webpack_require__(1);
+var React = __webpack_require__(0);
+var PriceBlock_1 = __webpack_require__(2);
+var DetailBlock_1 = __webpack_require__(13);
+var Block = (function (_super) {
+    tslib_1.__extends(Block, _super);
+    function Block(props) {
+        var _this = _super.call(this, props) || this;
+        _this.state = {
+            infoView: false
+        };
+        return _this;
+    }
+    Block.prototype.render = function () {
+        var _this = this;
+        var el = React.createElement(PriceBlock_1.PriceBlock, { coinInfo: this.props.coinInfo });
+        if (this.state.infoView === true) {
+            el = React.createElement(DetailBlock_1.DetailBlock, { coinInfo: this.props.coinInfo });
+        }
+        return (React.createElement("div", { style: {
+                width: '18em',
+                minWidth: '18em',
+                borderStyle: 'solid',
+                borderWidth: '.2em',
+                height: '18em',
+                margin: '.5em',
+                padding: '.5em',
+                alignItems: 'center'
+            }, className: "ms-borderColor-neutralPrimary ms-borderColor-neutralSecondary--hover", onClick: function () {
+                _this.changeView();
+            } }, el));
+    };
+    Block.prototype.changeView = function () {
+        this.setState({ infoView: !this.state.infoView });
+    };
+    return Block;
+}(React.Component));
+exports.Block = Block;
+
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = __webpack_require__(0);
+exports.DetailBlock = function (props) {
+    var curVal = props.coinInfo.myCoins * props.coinInfo.usdPrice;
+    var profit = curVal - props.coinInfo.investment;
+    var spanStyle = {
+        wordWrap: 'break-word',
+        fontSize: '1em',
+        paddingBottom: '7px',
+        display: 'inline-block'
+    };
+    var profStyle = {
+        backgroundColor: '#0078d7',
+        padding: '1px 7px 1px 5px',
+        color: 'white',
+        borderCornerShape: 'curve'
+    };
+    if (profit <= 0) {
+        profStyle = {
+            backgroundColor: 'red',
+            padding: '1px 7px 1px 5px',
+            color: 'white',
+            borderCornerShape: 'curve'
+        };
+    }
+    return (React.createElement("div", { style: { height: '100%' } },
+        React.createElement("a", { style: { textDecoration: 'none' }, href: 'https://www.worldcoinindex.com/coin/' + props.coinInfo.name, target: "_blank" },
+            React.createElement("span", { style: { fontSize: '2em' }, className: "ms-font-xxl ms-fontColor-themePrimary" }, props.coinInfo.name)),
+        React.createElement("br", null),
+        React.createElement("br", null),
+        React.createElement("div", { style: { height: '33%' } },
+            React.createElement("span", { style: { wordWrap: 'break-word', fontSize: '1em' }, className: "ms-font-l" },
+                "Investment: $",
+                props.coinInfo.investment
+                    .toFixed(2)
+                    .replace(/(\d)(?=(\d{3})+\.)/g, '$1,')),
             React.createElement("br", null),
             React.createElement("br", null),
-            React.createElement("div", { style: { height: '33%' } },
-                React.createElement("span", { style: { wordWrap: 'break-word', fontSize: '1em' }, className: "ms-font-l" }, props.coinInfo.ticker),
-                React.createElement("hr", null),
-                React.createElement("span", { style: { wordWrap: 'break-word', fontSize: '1em' }, className: "ms-font-l" },
-                    "USD: ",
-                    props.coinInfo.usdPrice),
-                React.createElement("br", null),
-                React.createElement("span", { style: { wordWrap: 'break-word', fontSize: '1em' }, className: "ms-font-l" },
-                    "BTC: ",
-                    props.coinInfo.btcPrice),
-                React.createElement("br", null),
-                React.createElement("br", null),
-                React.createElement("span", { style: { wordWrap: 'break-word', fontSize: '1em' }, className: "ms-font-l" },
-                    "Coins Owned: ",
-                    props.coinInfo.myCoins),
-                React.createElement("br", null),
-                React.createElement("span", { style: { wordWrap: 'break-word', fontSize: '1em' }, className: "ms-font-l" },
-                    "Estimated Value: $",
-                    (props.coinInfo.myCoins *
-                        props.coinInfo.usdPrice).toFixed(2)),
-                React.createElement("div", { style: {
-                        display: 'flex',
-                        flexDirection: 'column-reverse',
-                        height: '5em',
-                        justifyContent: 'flex-start'
-                    } },
-                    React.createElement("span", { style: { wordWrap: 'break-word', fontSize: '.8em', order: 3 }, className: "ms-font-s ms-fontColor-neutralSecondary" },
-                        "Volume (24 hours): ",
-                        props.coinInfo.volume24.toFixed(2)),
-                    React.createElement("span", { style: { wordWrap: 'break-word', fontSize: '.8em', order: 2 }, className: "ms-font-s ms-fontColor-neutralSecondary" },
-                        "Amount (24 hours):",
-                        ' $',
-                        (props.coinInfo.volume24 *
-                            props.coinInfo.usdPrice).toLocaleString('en-US', {
-                            minimumFractionDigits: 2
-                        })),
-                    React.createElement("span", { style: { wordWrap: 'break-word', fontSize: '.8em' }, className: "ms-font-s ms-fontColor-neutralSecondary" },
-                        "Time Updated: ",
-                        props.coinInfo.timestamp.toLocaleTimeString()))))));
+            React.createElement("span", { style: spanStyle, className: "ms-font-l" },
+                "Profit:",
+                ' ',
+                React.createElement("span", { style: profStyle },
+                    "$",
+                    profit.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,'))),
+            React.createElement("br", null),
+            React.createElement("span", { style: spanStyle, className: "ms-font-l" },
+                "Percent Change:",
+                ' ',
+                React.createElement("span", { style: profStyle },
+                    (curVal / props.coinInfo.investment * 100).toFixed(2),
+                    "%")))));
 };
 
 

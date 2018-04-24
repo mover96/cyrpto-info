@@ -125,12 +125,12 @@ export class App extends React.Component<null, AppState> {
 
   private getMyCoinInfo(): any {
     return [
-      { ticker: 'ADT/BTC', myCoins: 38343.07891198, investment: 2000 },
-      { ticker: 'ETH/BTC', myCoins: 8.7118, investment: 3000 - 2150 },
+      { ticker: 'ADT/BTC', myCoins: 38281, investment: 2038.28 },
+      { ticker: 'ETH/BTC', myCoins: 7.7083, investment: 0 },
       { ticker: 'BTC/BTC', myCoins: 0.00000299, investment: 0.01 },
-      { ticker: 'NEO/BTC', myCoins: 2.19, investment: 500 - 430 },
-      { ticker: 'ICX/BTC', myCoins: 423.34623, investment: 2150 },
-      { ticker: 'XMR/BTC', myCoins: 1.946, investment: 654 }
+      { ticker: 'NEO/BTC', myCoins: 0.19, investment: 0 },
+      { ticker: 'ICX/BTC', myCoins: 524.86, investment: 3168.41 },
+      { ticker: 'TRX/BTC', myCoins: 3771, investment: 914.21 }
     ]
   }
 
